@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -15,10 +16,14 @@ const PostSchema = new Schema({
   avatar: {
     type: String,
   },
-  likes: {
-    type: Schema.Types.ObjectId,
-    ref: 'users',
-  },
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+      },
+    },
+  ],
   comments: [
     {
       user: {
@@ -27,6 +32,7 @@ const PostSchema = new Schema({
       },
       text: {
         type: String,
+        required: true,
       },
       name: {
         type: String,
